@@ -6,9 +6,16 @@ var module_name = ""
 
 var next_modules = []
 
+# directions this module can link out to
+var link_north = false
+var link_south = false
+var link_east = false
+var link_west = false
+
 func load_bullet(bullet_list, bullet):
 	modify_bullet(bullet)
-	if (next_modules.size()  > 0):
+	
+	if (next_modules.size() > 0):
 		# load bullet into the first module if it exists
 		next_modules[0].load_bullet(bullet_list, bullet)
 		# if module has multiple next modules

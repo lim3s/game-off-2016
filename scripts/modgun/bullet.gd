@@ -10,5 +10,5 @@ var accuracy
 var speed
 
 func fire():
-	# boom boom
+	print("Fired bullet - " + str(damage) + " damage")
 	pass
