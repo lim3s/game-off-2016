@@ -8,7 +8,7 @@ var max_fall_speed = 2000
 
 var jump_speed = 1200 # normal jump speed
 var slam_first_hop_speed = 1000 # hop speed, higher gravity applied
-var slam_combo_hop_speed = 500 # hop after hitting enemy, normal gravity
+var slam_combo_hop_speed = 800 # hop after hitting enemy, normal gravity
 var can_jump = false
 var can_slam = false
 
@@ -18,6 +18,9 @@ var slamming = false
 var jump_key_free = true
 
 var velocity = Vector2()
+
+# node references
+onready var slam_hitbox = get_node("SlamHitbox")
 
 func _ready():
 	set_fixed_process(true)
@@ -57,6 +60,16 @@ func _fixed_process(delta):
 	elif (!Input.is_action_pressed("player_jump") && !jump_key_free):
 		jump_key_free = true
 	
+	# check collision with slam hitbox
+	if (slamming):
+		for body in slam_hitbox.get_overlapping_bodies():
+			if (body.is_in_group("enemy")):
+				body.slam_kill()
+				velocity.y = -slam_combo_hop_speed
+				slamming = false
+				can_slam = true
+	
+	# move player (should be done last)
 	var motion = velocity * delta
 	motion = move(motion)
 	

@@ -18,4 +18,12 @@ transform/pos = Vector2( 159.943, 155.841 )
 
 transform/pos = Vector2( 600, 864 )
 
+[node name="Enemy1" parent="." instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 928.773, 759.422 )
+
+[node name="Enemy2" parent="." instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 758.578, 757.372 )
+
 
