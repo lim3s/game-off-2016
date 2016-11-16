@@ -6,6 +6,8 @@ var movement_speed = 200
 
 var velocity = Vector2()
 
+export var health = 10
+
 func _ready():
 	set_fixed_process(true)
 
@@ -29,5 +31,7 @@ func _fixed_process(delta):
 		move(motion)
 
 # called when hit by a slam
-func slam_kill():
-	queue_free()
+func slam_kill(damage):
+	health -= damage
+	if (health <= 0):
+		queue_free()

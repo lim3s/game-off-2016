@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://scripts/enemy.gd" type="Script" id=1]
-[ext_resource path="res://sprites/enemy_temp.png" type="Texture" id=2]
+[ext_resource path="res://sprites/enemy_temp_red.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 32, 32 )
 
-[node name="Enemy" type="KinematicBody2D" groups=[ "enemy" ]]
+[node name="Enemy" type="KinematicBody2D" groups=[ "combo", "enemy" ]]
 
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
