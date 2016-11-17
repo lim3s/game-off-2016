@@ -63,7 +63,8 @@ func _fixed_process(delta):
 	# check collision with slam hitbox
 	if (slamming):
 		for body in slam_hitbox.get_overlapping_bodies():
-			if (body.is_in_group("enemy")):
+			print(body.get_name())
+			if (body.is_in_group("slam")):
 				body.slam_kill(slam_damage + bonus_damage)
 				if (bonus_damage > 0):
 					bonus_damage = 0
@@ -138,5 +139,6 @@ func hitstun_timer_ended():
 	hitstunned = false
 
 func jump_timer_ended():
-	print("Combo firing")
-	fire_combo = true
+	if (combo.count > 0):
+		print("Combo firing")
+		fire_combo = true
