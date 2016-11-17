@@ -3,7 +3,7 @@ extends KinematicBody2D
 
 const movement_speed = 500
 const gravity_normal = 50
-const gravity_slam = 120
+const gravity_slam = 110
 const max_fall_speed = 2000
 
 const jump_speed = 1200 # normal jump speed
@@ -39,6 +39,7 @@ onready var jump_hold_timer = get_node("JumpHoldTimer")
 
 func _ready():
 	set_fixed_process(true)
+	set_process_input(true)
 
 func _fixed_process(delta):
 	# player movement
@@ -59,16 +60,6 @@ func _fixed_process(delta):
 		else:
 			velocity.x = 0
 	
-	# jumping and slamming
-	if (Input.is_action_pressed("player_jump") && jump_key_free):
-		jump_key_free = false
-		if (can_jump):
-			jump()
-		elif (can_slam):
-			slam()
-	elif (!Input.is_action_pressed("player_jump") && !jump_key_free):
-		jump_key_free = true
-	
 	# check collision with slam hitbox
 	if (slamming):
 		for body in slam_hitbox.get_overlapping_bodies():
@@ -81,7 +72,12 @@ func _fixed_process(delta):
 				slamming = false
 				can_slam = true
 				
-				combo.add_combo(1)
+				if (fire_combo):
+					fire_combo = false
+					combo.consume_combo()
+					combo.reset_combo()
+				else:
+					combo.add_combo(1)
 	else:
 		for body in hurtbox.get_overlapping_bodies():
 			if (body.is_in_group("enemy")):
@@ -109,6 +105,18 @@ func _fixed_process(delta):
 	else:
 		can_jump = false
 
+func _input(event):
+	if (event.is_action_pressed("player_jump") && !event.is_echo()):
+		if (can_jump):
+			jump()
+			jump_key_free = false
+		elif (can_slam):
+			jump_hold_timer.start()
+			slam()
+	if (event.is_action_released("player_jump") && !event.is_echo()):
+		if (slamming):
+			jump_hold_timer.stop()
+
 func jump():
 	# jump
 	can_jump = false
@@ -130,4 +138,5 @@ func hitstun_timer_ended():
 	hitstunned = false
 
 func jump_timer_ended():
+	print("Combo firing")
 	fire_combo = true

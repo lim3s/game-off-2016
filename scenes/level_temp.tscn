@@ -23,15 +23,16 @@ health = 20
 [node name="Enemy1" parent="." instance=ExtResource( 3 )]
 
 transform/pos = Vector2( 928.773, 759.422 )
-health = 20
+health = 100
 
 [node name="Enemy2" parent="." instance=ExtResource( 3 )]
 
 transform/pos = Vector2( 758.578, 757.372 )
-health = 20
+health = 100
 
 [node name="Enemy 2" parent="." instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 1099.68, 763.416 )
+health = 100
 
 
