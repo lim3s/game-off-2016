@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://scenes/environment_temp.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/enemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/entities/platform.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=4]
 
 [node name="Level" type="Node2D"]
 
@@ -41,9 +40,5 @@ transform/pos = Vector2( 483.011, 595.899 )
 [node name="Platform3" parent="." instance=ExtResource( 3 )]
 
 transform/pos = Vector2( 729.143, 716.189 )
-
-[node name="Player" parent="." instance=ExtResource( 4 )]
-
-transform/pos = Vector2( 146.702, 118.184 )
 
 

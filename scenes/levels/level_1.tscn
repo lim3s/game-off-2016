@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://tileset/temp.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/entities/platform.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/entities/level_end.tscn" type="PackedScene" id=3]
 
 [node name="Level" type="Node2D"]
 
@@ -26,5 +27,9 @@ tile_data = IntArray( -1507271, 1, -1441735, 1, -1376199, 1, -1310663, 1, -12451
 [node name="Platform" parent="." instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 3424, -928 )
+
+[node name="LevelEnd" parent="." instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 4128, -192 )
 
 
