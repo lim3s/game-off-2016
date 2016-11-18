@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=1]
 
 [ext_resource path="res://scenes/environment_temp.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/enemy.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/entities/platform.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/entities/platform.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=4]
 
 [node name="Level" type="Node2D"]
 
@@ -11,39 +11,39 @@
 
 transform/pos = Vector2( -209.031, 0 )
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
-
-transform/pos = Vector2( 159.943, 155.841 )
-
-[node name="Enemy" parent="." instance=ExtResource( 3 )]
+[node name="Enemy" parent="." instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 600, 864 )
 health = 20
 
-[node name="Enemy1" parent="." instance=ExtResource( 3 )]
+[node name="Enemy1" parent="." instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 934.325, 842.7 )
 health = 100
 
-[node name="Enemy2" parent="." instance=ExtResource( 3 )]
+[node name="Enemy2" parent="." instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 778.935, 838.799 )
 health = 100
 
-[node name="Platform" parent="." instance=ExtResource( 4 )]
+[node name="Platform" parent="." instance=ExtResource( 3 )]
 
-transform/pos = Vector2( -22.2074, 381.227 )
+transform/pos = Vector2( -42.7129, 196.678 )
 
-[node name="Platform1" parent="." instance=ExtResource( 4 )]
+[node name="Platform1" parent="." instance=ExtResource( 3 )]
 
-transform/pos = Vector2( 220.224, 484.862 )
+transform/pos = Vector2( 158.708, 794.494 )
 
-[node name="Platform2" parent="." instance=ExtResource( 4 )]
+[node name="Platform2" parent="." instance=ExtResource( 3 )]
 
 transform/pos = Vector2( 483.011, 595.899 )
 
-[node name="Platform3" parent="." instance=ExtResource( 4 )]
+[node name="Platform3" parent="." instance=ExtResource( 3 )]
 
 transform/pos = Vector2( 729.143, 716.189 )
+
+[node name="Player" parent="." instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 146.702, 118.184 )
 
 

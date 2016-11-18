@@ -26,6 +26,8 @@ var slamming = false
 
 var jump_key_free = true
 var fire_combo = false
+var frame_buffer = true
+var frame_count = 0
 
 var velocity = Vector2()
 
@@ -63,7 +65,7 @@ func _fixed_process(delta):
 	# check collision with slam hitbox
 	if (slamming):
 		for body in slam_hitbox.get_overlapping_bodies():
-			print(body.get_name())
+			#print(body.get_name())
 			if (body.is_in_group("slam")):
 				body.slam_kill(slam_damage + bonus_damage)
 				if (bonus_damage > 0):
@@ -84,7 +86,7 @@ func _fixed_process(delta):
 			if (body.is_in_group("enemy")):
 				# take damage and knockback
 				# set invul timer
-				health -= 1
+				health = 0
 	
 	# move player (should be done last)
 	var motion = velocity * delta
@@ -93,24 +95,31 @@ func _fixed_process(delta):
 	if (is_colliding()):
 		var n = get_collision_normal()
 		# check if can jump
-		if (n == Vector2(0, -1) && !Input.is_action_pressed("player_jump")):
-			can_jump = true
+		if (n == Vector2(0, -1) && !frame_buffer):
+			if (!Input.is_action_pressed("player_jump")):
+				can_jump = true
 			can_slam = false
-			slamming = false
+			if (!get_collider().is_in_group("slam") && slamming):
+				slamming = false
 			jumping = false
 			
 			combo.reset_combo()
+		elif (n == Vector2(0, -1) && frame_buffer):
+			frame_count += 1
+			if (frame_count == 2):
+				frame_buffer = false
+				frame_count = 0
 		motion = n.slide(motion)
 		velocity = n.slide(velocity)
 		move(motion)
 	else:
 		can_jump = false
+		can_slam = true
 
 func _input(event):
 	if (event.is_action_pressed("player_jump") && !event.is_echo()):
 		if (can_jump):
 			jump()
-			jump_key_free = false
 		elif (can_slam):
 			jump_hold_timer.start()
 			slam()
@@ -140,5 +149,4 @@ func hitstun_timer_ended():
 
 func jump_timer_ended():
 	if (combo.count > 0):
-		print("Combo firing")
 		fire_combo = true
